@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_project_data_3_fx" default="compile.module.project_data_3_fx">
+  <dirname property="module.project_data_3_fx.basedir" file="${ant.file.module_project_data_3_fx}"/>
+  
+  <property name="module.jdk.home.project_data_3_fx" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.project_data_3_fx" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.project_data_3_fx" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.project_data_3_fx" value="-encoding windows-1252 -source 1.5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="project_data_3_fx.output.dir" value="${module.project_data_3_fx.basedir}/target/classes"/>
+  <property name="project_data_3_fx.testoutput.dir" value="${module.project_data_3_fx.basedir}/target/test-classes"/>
+  
+  <path id="project_data_3_fx.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="project_data_3_fx.module.production.classpath">
+    <path refid="${module.jdk.classpath.project_data_3_fx}"/>
+    <path refid="library.jsoup-1.8.2.classpath"/>
+  </path>
+  
+  <path id="project_data_3_fx.runtime.production.module.classpath">
+    <pathelement location="${project_data_3_fx.output.dir}"/>
+    <path refid="library.jsoup-1.8.2.classpath"/>
+  </path>
+  
+  <path id="project_data_3_fx.module.classpath">
+    <path refid="${module.jdk.classpath.project_data_3_fx}"/>
+    <pathelement location="${project_data_3_fx.output.dir}"/>
+    <path refid="library.jsoup-1.8.2.classpath"/>
+  </path>
+  
+  <path id="project_data_3_fx.runtime.module.classpath">
+    <pathelement location="${project_data_3_fx.testoutput.dir}"/>
+    <pathelement location="${project_data_3_fx.output.dir}"/>
+    <path refid="library.jsoup-1.8.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.project_data_3_fx">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.project_data_3_fx">
+    <patternset refid="excluded.from.module.project_data_3_fx"/>
+  </patternset>
+  
+  <path id="project_data_3_fx.module.sourcepath">
+    <dirset dir="${module.project_data_3_fx.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="project_data_3_fx.module.test.sourcepath">
+    <dirset dir="${module.project_data_3_fx.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.project_data_3_fx" depends="compile.module.project_data_3_fx.production,compile.module.project_data_3_fx.tests" description="Compile module Project Data 3 FX"/>
+  
+  <target name="compile.module.project_data_3_fx.production" depends="register.custom.compilers" description="Compile module Project Data 3 FX; production classes">
+    <mkdir dir="${project_data_3_fx.output.dir}"/>
+    <javac2 destdir="${project_data_3_fx.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.project_data_3_fx}/javac">
+      <compilerarg line="${compiler.args.project_data_3_fx}"/>
+      <bootclasspath refid="project_data_3_fx.module.bootclasspath"/>
+      <classpath refid="project_data_3_fx.module.production.classpath"/>
+      <src refid="project_data_3_fx.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.project_data_3_fx"/>
+    </javac2>
+    
+    <copy todir="${project_data_3_fx.output.dir}">
+      <fileset dir="${module.project_data_3_fx.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.project_data_3_fx.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.project_data_3_fx.tests" depends="register.custom.compilers,compile.module.project_data_3_fx.production" description="compile module Project Data 3 FX; test classes" unless="skip.tests">
+    <mkdir dir="${project_data_3_fx.testoutput.dir}"/>
+    <javac2 destdir="${project_data_3_fx.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.project_data_3_fx}/javac">
+      <compilerarg line="${compiler.args.project_data_3_fx}"/>
+      <bootclasspath refid="project_data_3_fx.module.bootclasspath"/>
+      <classpath refid="project_data_3_fx.module.classpath"/>
+      <src refid="project_data_3_fx.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.project_data_3_fx"/>
+    </javac2>
+    
+    <copy todir="${project_data_3_fx.testoutput.dir}">
+      <fileset dir="${module.project_data_3_fx.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.project_data_3_fx" description="cleanup module">
+    <delete dir="${project_data_3_fx.output.dir}"/>
+    <delete dir="${project_data_3_fx.testoutput.dir}"/>
+  </target>
+</project>
