@@ -3,7 +3,8 @@
     <title>{{ title }} - microblog</title>
   </head>
   <body>
-      <p>Hello, {{ user.nickname }}! You are {{ user.age}} years old. You work at {{ user.company}}.
-       you go to {{ user.school }}.</p>
+      {% for vehicle in vehicles %}
+      <div><p>vehicle: {{vehicle.id}} - ignitions: {{ vehicle.ignitions }} </p></div>
+      {% endfor %}
   </body>
 </html>
