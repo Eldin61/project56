@@ -8,4 +8,4 @@ Guide om Flask werkend te krijgen op je pc.
 3.  Windows users run flaskWin\Scripts\python run.py
     Linux/OSX users chmod a+x run.py om hem executable te maken en ./run.py om hem te runnen
 
-4. De develop server gaat nu aan en je kan via http:\\localhost:5000 op de site komen.
+4. De develop server gaat nu aan en je kan via http://localhost:5000 op de site komen.
