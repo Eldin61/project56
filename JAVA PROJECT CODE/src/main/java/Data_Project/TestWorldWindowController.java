@@ -41,7 +41,7 @@ public class TestWorldWindowController extends Thread {
                 NUM_OF_THREADS = Integer.parseInt(mArray[0]);
             }*/
             //make threads
-            NUM_OF_THREADS = 5;
+            NUM_OF_THREADS = 1;
             Thread[] threadList = new Thread[NUM_OF_THREADS];
             
             //spawn threads 
@@ -71,7 +71,6 @@ public class TestWorldWindowController extends Thread {
     }
     public void connect2db(){
          Connection conn = null;
-        ResultSet rs = null;
         Statement stmt = null;
         try{
             // connect
@@ -96,7 +95,6 @@ public class TestWorldWindowController extends Thread {
              System.out.println(sql);
              stmt.executeUpdate(sql);
              // Close all the resources
-            rs.close();
               stmt.close();
             if (conn != null){
                 conn.close();
