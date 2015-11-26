@@ -14,8 +14,8 @@ public class ApplicationMenuController  {
 
     @FXML
     public void Function1() {
-        System.out.println("doe iets");
-    }
+        fxmlController logout = new fxmlController();
+        logout.setLogin("Log In", "/TestWorldWindow.fxml");    }
 
     @FXML
     public void Function2() throws SQLException {

@@ -53,7 +53,7 @@
          </children>
       </GridPane>
   
-      <Button mnemonicParsing="false" onAction="#Function1" prefHeight="25.0" prefWidth="141.0" text="Test Function1" GridPane.columnIndex="5" GridPane.columnSpan="3" GridPane.rowIndex="9" />
-      <Button mnemonicParsing="false" onAction="#Function2" prefHeight="25.0" prefWidth="142.0" text="Test Function2" GridPane.columnIndex="5" GridPane.columnSpan="3" GridPane.rowIndex="10" />
+      <Button mnemonicParsing="false" onAction="#Function1" prefHeight="25.0" prefWidth="141.0" text="Test Page" GridPane.columnIndex="5" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+      <Button mnemonicParsing="false" onAction="#Function2" prefHeight="25.0" prefWidth="142.0" text="Static SQL Connection sample" GridPane.columnIndex="5" GridPane.columnSpan="3" GridPane.rowIndex="10" />
    </children>
 </GridPane>
