@@ -1,5 +1,12 @@
 package Data_Project;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 
 /**
@@ -33,13 +40,6 @@ public class TestWorldWindowController extends Thread {
         try{
             //load driver
             Class.forName("org.postgresql.Driver");
-     /*       // number of threads 
-            if (mArray.length >1){
-                System.out.println("Error invalid syntax");
-                //System.exit(0);
-            }else if (mArray.length == 1){
-                NUM_OF_THREADS = Integer.parseInt(mArray[0]);
-            }*/
             //make threads
             NUM_OF_THREADS = 1;
             Thread[] threadList = new Thread[NUM_OF_THREADS];
@@ -66,12 +66,34 @@ public class TestWorldWindowController extends Thread {
     }
     
     public void run(){
-        // random functie
-       connect2db();
+        Timestamp rDate = null;
+        
+       //gets random date
+        try {
+            rDate = randomDate();
+        } catch (ParseException ex) {
+            Logger.getLogger(TestWorldWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       //gets random id
+       int rValue = (int)(Math.random() * (1000000 - 0 + 1));
+       connect2db(rDate, rValue);
     }
-    public void connect2db(){
+    public Timestamp randomDate() throws ParseException{
+        //creates a random date between 2015-2016
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        java.util.Date dateFrom = dateFormat.parse("2015");
+        long timestampFrom = dateFrom.getTime();
+        java.util.Date dateTo = dateFormat.parse("2016");
+        long timestampTo = dateTo.getTime();
+        Random random = new Random();
+        long timeRange = timestampTo - timestampFrom;
+        long randomTimestamp = timestampFrom + (long) (random.nextDouble() * timeRange);
+        return new Timestamp (randomTimestamp);
+        
+    }
+    
+    public void connect2db(Timestamp date, int value){
          Connection conn = null;
-        Statement stmt = null;
         try{
             // connect
             conn = DriverManager.getConnection(
@@ -84,16 +106,18 @@ public class TestWorldWindowController extends Thread {
             // root = password
             
             // create statement
-            stmt = conn.createStatement ();
-            
+            PreparedStatement stmt = conn.prepareStatement (
+            "INSERT INTO EVENTS (datetime,unitid,port,value) VALUES (?, ?, 'Ignition', TRUE)");
+            stmt.setTimestamp(1, date);
+            stmt.setInt(2, value);
             // executes query
-             // static sql querys hier
-            testcounter = (int)(Math.random() * (1000000 - 0 + 1));
-             String sql = "INSERT INTO EVENTS (datetime,unitid,port,value) "
-               + "VALUES ('2015-03-10 01:01:01', "+testcounter+", 'Ignition', TRUE);";
+            // static sql querys hier          
+//             String sql = "INSERT INTO EVENTS (datetime,unitid,port,value) "
+//               + "VALUES ("+date+", "+testcounter+", 'Ignition', TRUE);";
           //   testcounter++;
-             System.out.println(sql);
-             stmt.executeUpdate(sql);
+             System.out.println(stmt);
+             stmt.executeUpdate();
+             
              // Close all the resources
               stmt.close();
             if (conn != null){
