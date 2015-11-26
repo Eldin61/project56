@@ -6,7 +6,7 @@ import urllib, json
 @app.route("/index")
 
 def index():
-    url = "http://localhost/index.php/connections//?where[0][col]=value&where[0][op]==&where[0][val]=false"
+    url = "http://localhost/index.php/connections//?where[0][col]=value&where[0][op]==&where[0][val]=false&limit=50"
     response = urllib.urlopen(url)
     data = json.loads(response.read())
     i = 0
