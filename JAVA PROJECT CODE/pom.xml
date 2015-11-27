@@ -33,9 +33,9 @@
 
         -->
         <dependency>
-	<groupId>postgresql</groupId>
+	<groupId>org.postgresql</groupId>
 	<artifactId>postgresql</artifactId>
-	<version>9.1-901.jdbc4</version>
+	<version>9.4-1206-jdbc42</version>
         </dependency>
 
         <dependency>
@@ -77,4 +77,8 @@
         </plugins>
     </build>
     <name>Project_5_6</name>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 </project>
