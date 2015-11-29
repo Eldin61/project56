@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>{{ title }} - microblog</title>
+    <title>Project56</title>
   </head>
   <body>
       {% for vehicle in vehicles %}
@@ -8,12 +8,13 @@
       {% endfor %}
 
       <h1>Ignition check</h1>
-        <form action="" method="post" name="login">
-            <p>
-                Please enter how many results you want:<br>
-                {{ form.results(size=3) }}<br>
-            </p>
-            <p><input type="submit" value="search"></p>
-        </form>
+        <a href="/test">Test me!</a>
+        {% for data in data %}
+        <div><p>Vehicle: {{ data.id }} - ignitions: {{ data.ignitions }}</p></div>
+        {% endfor %}
+        <form action="test2" method="post">
+          <input type="text" name="testreq"><br>
+          <input type="submit" value="Submit">
+</form>
   </body>
 </html>
