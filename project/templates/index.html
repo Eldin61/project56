@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>project 56</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+  <div>
+    <h1>Welcome to project 56!</h1>
+    <br>
+    <p>
+      Click <a href="/unique">here</a> to see results.
+    </p>
+    <br>
+    <div>
+      {% for data in data %}
+      <p>
+        Vehicle: {{data.id}} - ignitions: {{data.ignitions}}
+      </p>
+      {% endfor %}
+    </div>
+    <br>
+    <p>
+      Click <a href="/logout">to logout</a>
+    </p>
+  </div>
+</body>
+</html>
