@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 from functools import wraps
 from app import app
+import analyse
 
 def login_required(f):
     @wraps(f)
@@ -8,16 +9,16 @@ def login_required(f):
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
-            return redirect(url_for('login'))
+            return redirect(url_for('login.html'))
     return wrap
 
 @app.route('/logout')
 @login_required
 def logout():
     session.pop('logged_in', None)
-    return redirect(url_for('login'))
+    return redirect(url_for('login.html'))
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login.html', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
         if request.form['email'] != 'admin' or request.form['password'] != 'admin':
@@ -28,22 +29,22 @@ def login():
     return render_template('pages/login.html', title="Login")
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index.html')
 @login_required
 def index():
     return render_template('pages/index.html', title="Home", header="Home")
 
-@app.route('/blank')
+@app.route('/blank.html')
 @login_required
 def blank():
     return render_template('pages/blank.html', title="Blank", header="Blank", nav="Blank Page")
 
-@app.route('/flot')
+@app.route('/flot.html')
 @login_required
 def flot():
     return render_template('pages/flot.html', title="Flot", header="Flot Charts", nav="Flot Page")
 
-@app.route('/morris')
+@app.route('/morris.html')
 @login_required
 def morris():
     return render_template('pages/morris.html', title="Morris", header="Morris.js Charts", nav="Morris Page")

@@ -3,7 +3,7 @@ import urllib, json
 class Analyse:
 
     def getUnique(f):
-        url = "http://localhost/index.php/events//?where[0][col]=value&where[0][op]==&where[0][val]=true"
+        url = "http://145.24.222.121/index.php/events//?where[0][col]=value&where[0][op]==&where[0][val]=true"
         response = urllib.urlopen(url)
         jsonObj = json.loads(response.read())
 
@@ -17,7 +17,7 @@ class Analyse:
         data = []
         totalDict = {}
         while j < len(unitid2):
-            url2 = "http://localhost/index.php/events//?where[0][col]=value&where[0][op]==&where[0][val]=true&where[1][col]=unitid&where[1][op]==&where[1][val]=" + str(unitid2[j])
+            url2 = "http://145.24.222.121/index.php/events//?where[0][col]=value&where[0][op]==&where[0][val]=true&where[1][col]=unitid&where[1][op]==&where[1][val]=" + str(unitid2[j])
             response2 = urllib.urlopen(url2)
             data2 = json.loads(response2.read())
 
