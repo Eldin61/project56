@@ -49,42 +49,42 @@ def flot():
 def morris():
     return render_template('pages/morris.html', title="Morris", header="Morris.js Charts", nav="Morris Page")
 
-@app.route('/tables')
+@app.route('/tables.html')
 @login_required
 def tables():
     return render_template('pages/tables.html', title="Tables", header="Tables", nav="Tables Page")
 
-@app.route('/forms')
+@app.route('/forms.html')
 @login_required
 def forms():
     return render_template('pages/forms.html', title="Forms", header="Forms", nav="Forms Page")
 
-@app.route('/panels-wells')
+@app.route('/panels-wells.html')
 @login_required
 def panels_wells():
     return render_template('pages/panels-wells.html', title="Panels and Wells", header="Panels and Wells", nav="Panels and Wells Page")
 
-@app.route('/buttons')
+@app.route('/buttons.html')
 @login_required
 def buttons():
     return render_template('pages/buttons.html', title="Buttons", header="Buttons", nav="Buttons Page")
 
-@app.route('/notifications')
+@app.route('/notifications.html')
 @login_required
 def notifications():
     return render_template('pages/notifications.html', title="Notifications", header="Notifications", nav="Notifications Page")
 
-@app.route('/typography')
+@app.route('/typography.html')
 @login_required
 def typography():
     return render_template('pages/typography.html', title="Typography", header="Typography", nav="Typography Page")
 
-@app.route('/icons')
+@app.route('/icons.html')
 @login_required
 def icons():
     return render_template('pages/icons.html', title="Icons", header="Icons", nav="Icons Page")
 
-@app.route('/grid')
+@app.route('/grid.html')
 @login_required
 def grid():
     return render_template('pages/grid.html', title="Grid", header="Grid", nav="Grid Page")
