@@ -7,7 +7,12 @@ package Data_Project;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -167,6 +172,10 @@ public class TableManager {
         final int numsatellites;
         final int hdop;
         final String quality;
+        
+        public Position(){
+            
+        }
 
         public Position(Timestamp datetime, int unitid, double rdx, double rdy, int speed, int course, int numsatellites, int hdop, String quality) {
             this.datetime = datetime;
@@ -216,4 +225,37 @@ public class TableManager {
             return quality;
         }
     }
+    public Timestamp randomDate(){
+        //creates a random date between 2015-2016
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        java.util.Date dateFrom = null;
+        try {
+            dateFrom = dateFormat.parse("2015");
+        } catch (ParseException ex) {
+            Logger.getLogger(TableManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        long timestampFrom = dateFrom.getTime();
+        java.util.Date dateTo = null;
+        try {
+            dateTo = dateFormat.parse("2016");
+        } catch (ParseException ex) {
+            Logger.getLogger(TableManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        long timestampTo = dateTo.getTime();
+        Random random = new Random();
+        long timeRange = timestampTo - timestampFrom;
+        long randomTimestamp = timestampFrom + (long) (random.nextDouble() * timeRange);
+        return new Timestamp(randomTimestamp);
+    }
+    
+    public int randomUnit(){
+        Random rand = null;
+        int randomNum = rand.nextInt((99999999 - 15000000) + 1) + 15000000;
+        return randomNum;
+    }
+    
+    public boolean randomBoolean(){
+        return Math.random() < 0.5;
+    }
+    
 }
