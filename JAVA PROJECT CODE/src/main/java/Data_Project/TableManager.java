@@ -6,6 +6,8 @@
 package Data_Project;
 
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -15,13 +17,42 @@ public class TableManager {
     final static int amountCars = 50;
 
     public TableManager() {
+
+    }
+
+    public Connection generateConnectionTable(int counter) {
+        Timestamp t = new Timestamp((new Date().getTime() + counter * 1000));
+        boolean value = (counter % 2 == 0);
+
+        return new Connection(t, counter, "con", value);
+    }
+
+    public Event generateEventTable(int counter) {
+        Timestamp t = new Timestamp((new Date().getTime() + counter * 1000));
+        boolean value = (counter % 2 == 0);
+        return new Event(t, counter, "evt", value);
+    }
+
+    public Monitoring generateMonitoringTable(int counter) {
+        Timestamp tBegin = new Timestamp((new Date().getTime() + counter * 1000));
+        Timestamp tEnd = new Timestamp((new Date().getTime() + counter * 1000));
+        double rDouble = new Random().nextDouble() * 1000;
+        return new Monitoring(counter, tBegin, tEnd, "mon", rDouble, rDouble, rDouble);
+    }
+
+    public Position generatePositionTable(int counter) {
+        Timestamp t = new Timestamp((new Date().getTime() + counter * 1000));
+        Random r = new Random();
+        double rDouble = r.nextDouble() * 1000;
+        int rInt = r.nextInt() * 1000;
+        return new Position(t, counter, rDouble, rDouble, rInt, rInt, rInt, rInt, "pos");
     }
     
     public class Connection {
-        Timestamp datetime;
-        int unitId;
-        String port;
-        boolean value;
+        private Timestamp datetime;
+        private int unitId;
+        private String port;
+        private boolean value;
 
         public Connection(Timestamp datetime, int unitId, String port, boolean value) {
             this.datetime = datetime;
@@ -29,6 +60,7 @@ public class TableManager {
             this.port = port;
             this.value = value;
         }
+
 
         public Timestamp getDatetime() {
             return datetime;
@@ -48,10 +80,10 @@ public class TableManager {
     }
     
     public class Event {
-        Timestamp datetime;
-        int unitId;
-        String port;
-        boolean value;
+        final Timestamp datetime;
+        final int unitId;
+        final String port;
+        final boolean value;
 
         public Event(Timestamp datetime, int unitId, String port, boolean value) {
             this.datetime = datetime;
@@ -78,13 +110,13 @@ public class TableManager {
     }
     
     public class Monitoring {
-        int unitId;
-        Timestamp begintime;
-        Timestamp endtime;
-        String type;
-        double min;
-        double max;
-        double sum;
+        final int unitId;
+        final Timestamp begintime;
+        final Timestamp endtime;
+        final String type;
+        final double min;
+        final double max;
+        final double sum;
 
         public Monitoring(int unitId, Timestamp begintime, Timestamp endtime, String type, double min, double max, double sum) {
             this.unitId = unitId;
@@ -126,15 +158,15 @@ public class TableManager {
     }
     
     public class Position {
-        Timestamp datetime;
-        int unitid;
-        double rdx;
-        double rdy;
-        int speed;
-        int course;
-        int numsatellites;
-        int hdop;
-        String quality;
+        final Timestamp datetime;
+        final int unitid;
+        final double rdx;
+        final double rdy;
+        final int speed;
+        final int course;
+        final int numsatellites;
+        final int hdop;
+        final String quality;
 
         public Position(Timestamp datetime, int unitid, double rdx, double rdy, int speed, int course, int numsatellites, int hdop, String quality) {
             this.datetime = datetime;

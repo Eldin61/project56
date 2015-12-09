@@ -6,12 +6,13 @@
 package Data_Project.Threads;
 
 import Data_Project.TableManager;
-import java.rmi.UnexpectedException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.logging.Level;
@@ -22,13 +23,14 @@ import java.util.logging.Logger;
  * @author Administrator
  */
 public class ConnectionsThread extends Thread {
-    final BlockingQueue<TableManager.Connection> connectionsQueue;
-    Connection con;
+    private final BlockingQueue<TableManager.Connection> connectionsQueue;
+    private final int batchSize = 1000;
+    private Connection con;
 
     public ConnectionsThread(BlockingQueue queue) {
         connectionsQueue = queue;
         try {
-            this.con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres", "root");
+            this.con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres", "forthe12");
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionsThread.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -36,23 +38,22 @@ public class ConnectionsThread extends Thread {
 
     @Override
     public void run() {
+        System.out.println("Starting thread at: " + new Date().getTime());
         while (true) {
             List<TableManager.Connection> list = new ArrayList<>();
             try {
-                while (list.size() < 10) {
+                while (list.size() < batchSize) {
                     list.add(connectionsQueue.take());
                 }
-                System.out.println(list);
+                System.out.println(connectionsQueue.size());
                 saveWithBatchPreparedStatement(list);
             } catch (InterruptedException e) {
                 System.out.println("Error occured: " + e);
-            } catch (UnexpectedException e) {
-                e.printStackTrace();
             }
         }
     }
 
-    public void saveWithBatchPreparedStatement(List<TableManager.Connection> names) throws UnexpectedException {
+    private void saveWithBatchPreparedStatement(List<TableManager.Connection> names) {
         try (PreparedStatement ps = con.prepareStatement("INSERT INTO connections (datetime,unitid,port,value) VALUES (?,?,?,?)")) {
             con.setAutoCommit(false);
             for (TableManager.Connection c : names) {
@@ -63,6 +64,7 @@ public class ConnectionsThread extends Thread {
                 ps.addBatch();
             }
             ps.executeBatch();
+            System.out.println("Done! At: " + new Date().getTime());
             con.setAutoCommit(true);
         } catch (SQLException e) {
             e.printStackTrace();

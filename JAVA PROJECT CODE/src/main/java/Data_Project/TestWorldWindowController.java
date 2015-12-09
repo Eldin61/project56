@@ -4,37 +4,36 @@ import Data_Project.Threads.ConnectionsThread;
 import Data_Project.Threads.EventsThread;
 import Data_Project.Threads.MonitoringThread;
 import Data_Project.Threads.PositionsThread;
+import javafx.fxml.FXML;
+
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.fxml.FXML;
 
-/**
- * Created by Indi on 5/27/2015.
- */
 public class TestWorldWindowController extends Thread {
-    final BlockingQueue<TableManager.Connection> connectionsQueue;
-    final BlockingQueue<TableManager.Event> eventsQueue;
-    final BlockingQueue<TableManager.Monitoring> monitoringQueue;
-    final BlockingQueue<TableManager.Position> positionsQueue;
+    private final BlockingQueue<TableManager.Connection> connectionsQueue;
+    private final BlockingQueue<TableManager.Event> eventsQueue;
+    private final BlockingQueue<TableManager.Monitoring> monitoringQueue;
+    private final BlockingQueue<TableManager.Position> positionsQueue;
     
     private static int NUM_OF_THREADS = 10;
     static int testcounter = 0;
     int m_myId;
     static  int c_nextId = 1;
-    static  Connection s_conn = null;
+    static Connection s_conn = null;
     private String[] toppings = {"1"};
     
     public TestWorldWindowController(){
         super();
         this.connectionsQueue = new LinkedBlockingQueue<>();
-        //nonblockingqueue
         this.eventsQueue = new LinkedBlockingQueue<>();
         this.monitoringQueue = new LinkedBlockingQueue<>();
         this.positionsQueue = new LinkedBlockingQueue<>();
@@ -52,7 +51,7 @@ public class TestWorldWindowController extends Thread {
     }
     @FXML
     public void threadTest(){
-        threadFunction(toppings);
+        threadFunction();
     }
     
     private void initThreads() {
@@ -66,7 +65,78 @@ public class TestWorldWindowController extends Thread {
      * Alternative threading.
      */
     private void threadFunction() {
-        
+        try {
+            System.out.println("Current row count: " + selectTableSize());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        TimerTask connectionsTask = new TimerTask() {
+            int i = 0;
+            @Override
+            public void run() {
+                //System.out.println(System.currentTimeMillis());
+                //System.out.println("Connection!");
+                connectionsQueue.offer(new TableManager().generateConnectionTable(i++));
+                System.out.println(connectionsQueue.size());
+            }
+        };
+
+        TimerTask eventsTask = new TimerTask() {
+            int i = 0;
+            @Override
+            public void run() {
+                //System.out.println(System.currentTimeMillis());
+                //System.out.println("Event!");
+                eventsQueue.offer(new TableManager().generateEventTable(i++));
+                System.out.println(connectionsQueue.size());
+            }
+        };
+
+        TimerTask monitoringTask = new TimerTask() {
+            int i = 0;
+            @Override
+            public void run() {
+                //System.out.println(System.currentTimeMillis());
+                //System.out.println("Monitoring!");
+                monitoringQueue.offer(new TableManager().generateMonitoringTable(i++));
+                System.out.println(connectionsQueue.size());
+            }
+        };
+
+        TimerTask positionsTask = new TimerTask() {
+            int i = 0;
+            @Override
+            public void run() {
+                //System.out.println(System.currentTimeMillis());
+                //System.out.println("Position!");
+                positionsQueue.offer(new TableManager().generatePositionTable(i++));
+                System.out.println(connectionsQueue.size());
+            }
+        };
+
+        new Timer().schedule(connectionsTask,0,4);
+        new Timer().schedule(eventsTask,1,4);
+        new Timer().schedule(monitoringTask,2,4);
+        new Timer().schedule(positionsTask,3,4);
+        initThreads();
+    }
+
+    /**
+     *
+     */
+    private int selectTableSize() throws SQLException {
+        ResultSet resultSet = null;
+        try {
+            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres", "forthe12");
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(unitid) FROM connections");
+            resultSet = ps.executeQuery();
+            resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet.getInt(1);
     }
     
     public void threadFunction(String mArray[]){
