@@ -50,8 +50,10 @@
             </div>
 		<div class="panel panel-white">
 		<!-- google maps for flask https://pypi.python.org/pypi/Flask-GoogleMaps -->
+		<center> Last Know Position
 			<center>
-		{{ googlemap("my_awesome_map", lat= gieflist[12], lng=gieflist[13], markers=[(gieflist[12], gieflist[13])]) }}
+		{{ googlemap("my_awesome_map", lat= gieflist[12], lng=gieflist[13], markers=[(gieflist[12], gieflist[13]),
+																													]) }}
 			</center>
 	
 		</div> 
@@ -108,7 +110,7 @@
 
 <div class="panel panel-default">
                 <div class="panel-heading">
-                       <center>      Tracking Information : </center>
+                       <center>      Current Tracking Information : </center>
                 </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -134,7 +136,9 @@
                             </div></center>
                             <!-- /.table-responsive -->
                         </div>
-						
+									<center> Known Locations
+		{{ googlemap("GPSActivity", lat= trackinghistory_list[0][0], lng=trackinghistory_list[0][1], markers=trackinghistory_list) }}
+			</center>
                         <!-- /.panel-body -->
             </div>
                     <!-- /.panel -->

@@ -88,62 +88,83 @@ def cars():
 		if request.form['submit'] == '0':
 			int_carinfo = unitid[0]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+			print trackinghistory_list			
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		elif request.form['submit'] == '1':
 			int_carinfo = unitid[1]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		if request.form['submit'] == '2':
 			int_carinfo = unitid[2]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		if request.form['submit'] == '3':
 			int_carinfo = unitid[3]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		if request.form['submit'] == '4':
 			int_carinfo = unitid[4]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		elif request.form['submit'] == '5':
 			int_carinfo = unitid[5]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		if request.form['submit'] == '6':
 			int_carinfo = unitid[6]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		if request.form['submit'] == '7':
 			int_carinfo = unitid[7]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		if request.form['submit'] == '8':
 			int_carinfo = unitid[8]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass			
 		elif request.form['submit'] == '9':
 			int_carinfo = unitid[9]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		if request.form['submit'] == '10':
 			int_carinfo = unitid[10]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		if request.form['submit'] == '11':
 			int_carinfo = unitid[11]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist)
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
+
+			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass												
     elif request.method == 'GET':
 	    return render_template('pages/cars.html', title="Cars", header="Cars", nav="Car Status",unitid = unitid, status = status)
