@@ -51,7 +51,7 @@
 		<div class="panel panel-white">
 		<!-- google maps for flask https://pypi.python.org/pypi/Flask-GoogleMaps -->
 			<center>
-		<!--BRACKET BRACKET googlemap("my_awesome_map", lat= 51.314293867352156, lng=6.072404739820687, markers=[(51.314293867352156, 6.072404739820687)]) BRACKETBRACKET -->
+		{{ googlemap("my_awesome_map", lat= gieflist[12], lng=gieflist[13], markers=[(gieflist[12], gieflist[13])]) }}
 			</center>
 	
 		</div> 
@@ -71,20 +71,28 @@
        
                                     <tbody>
                                         <tr class="success">
-                                         <td><center> X Axis</center> </td>
+                                         <td><center> X Axis RD</center> </td>
                                          <td><center>{{gieflist[5]}}</center></td>
                                         </tr>
                                         <tr class="info">
-                                         <td><center> X Axis</center> </td>
+                                         <td><center> Y Axis RD</center> </td>
                                          <td><center>{{gieflist[6]}}</center></td>
                                         </tr>
                                         <tr class="warning">
-                                            <td><center> Speed</center> </td>
-                                            <td><center> {{gieflist[7]}}</center> </td>
+                                            <td><center> X Axis WGS</center> </td>
+                                            <td><center> {{gieflist[12]}}</center> </td>
                                         </tr>
                                         <tr class="danger">
-                                            <td><center> Course</td>
-                                            <td><center> {{gieflist[8]}}°</center> </td>
+                                            <td><center> Y Axis WGS</td>
+                                            <td><center> {{gieflist[13]}}°</center> </td>
+                                        </tr>
+									    <tr class="success">
+                                         <td><center> Speed </center> </td>
+                                         <td><center>{{gieflist[7]}}</center></td>
+                                        </tr>
+                                        <tr class="info">
+                                         <td><center> Course</center> </td>
+                                         <td><center>{{gieflist[8]}}</center></td>
                                         </tr>
                                     </tbody>
                                 </table>

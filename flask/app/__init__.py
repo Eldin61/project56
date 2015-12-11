@@ -1,11 +1,12 @@
 from flask import Flask, send_from_directory
 import os
+from flask_googlemaps import GoogleMaps
 
 app = Flask(__name__)
 app.config.from_object('config')
 
 from app import views
-
+GoogleMaps(app)
 
 @app.route('/bower_components/<path:path>')
 def send_bower(path):

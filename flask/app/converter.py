@@ -1,70 +1,73 @@
-import math
+# Formules voor benadering zijn gebaseerd op http://www.dekoepel.nl/pdf/Transformatieformules.pdf
+# Bovenstaande link werkt helaas niet meer, daar Stiching de Koepel opgeheven is. Backup link: http://media.thomasv.nl/2015/07/Transformatieformules.pdf
+
 class Converter:
-    RDOriginX = 155E3
-    RDOriginY = 463E3
-    GpsOriginLat = 52.1551744
-    GpsOriginLon = 5.38720621
-    def __init__(self):
-        self.lat = []
-        self.lon = []
-        for i in range(0,11):
-            self.lat.insert(i, [])
-            self.lon.insert(i, [])
-            self.lon.insert(i+1,[])
 
-        ## Latitude calculation
-        self.lat[0] = [0,1,3235.65389]
-        self.lat[1] = [2,0,-32.58297]
-        self.lat[2] = [0,2,-0.2475]
-        self.lat[3] = [2,1,-0.84978]
-        self.lat[4] = [0,3,-0.0665]
-        self.lat[5] = [2,2,-0.01709]
-        self.lat[6] = [1,0,-0.00738]
-        self.lat[7] = [4,0,0.0053]
-        self.lat[8] = [2,3,-3.9E-4]
-        self.lat[9] = [4,1,3.3E-4]
-        self.lat[10] = [1,1,-1.2E-4]
+    X0      = 155000
+    Y0      = 463000
+    phi0    = 52.15517440
+    lam0    = 5.38720621
+
+    def fromRdToWgs( self, coords ):
+
+        Kp = [0,2,0,2,0,2,1,4,2,4,1]
+        Kq = [1,0,2,1,3,2,0,0,3,1,1]
+        Kpq = [3235.65389,-32.58297,-0.24750,-0.84978,-0.06550,-0.01709,-0.00738,0.00530,-0.00039,0.00033,-0.00012]
+
+        Lp = [1,1,1,3,1,3,0,3,1,0,2,5]
+        Lq = [0,1,2,0,3,1,1,2,4,2,0,0]
+        Lpq = [5260.52916,105.94684,2.45656,-0.81885,0.05594,-0.05607,0.01199,-0.00256,0.00128,0.00022,-0.00022,0.00026]
+
+        dX = 1E-5 * ( coords[0] - self.X0 )
+        dY = 1E-5 * ( coords[1] - self.Y0 )
         
-        ## Longitude calculation
-        self.lon[0] = [1,0,5260.52916]
-        self.lon[1] = [1,1,105.94684]
-        self.lon[2] = [1,2,2.45656]
-        self.lon[3] = [3,0,-0.81885]
-        self.lon[4] = [1,3,0.05594]
-        self.lon[5] = [3,1,-0.05607]
-        self.lon[6] = [0,1,0.01199]
-        self.lon[7] = [3,2,-0.00256]
-        self.lon[8] = [1,4,0.00128]
-        self.lon[9] = [0,0,2.2E-4]
-        self.lon[10] = [2,0,-2.2E-4]
-        self.lon[11] = [5,0,2.6E-4]
+        phi = 0
+        lam = 0
 
-    def toLat(self,rdX,rdY):
-        a = 0
-        dX = 1E-5 * (rdX - self.RDOriginX)
-        dY = 1E-5 * (rdY - self.RDOriginY)
+        for k in range(len(Kpq)):
+            phi = phi + ( Kpq[k] * dX**Kp[k] * dY**Kq[k] )
+        phi = self.phi0 + phi / 3600
 
-        for i in range(0,11):
-            a = a + ( self.lat[i][2] * math.pow(dX, self.lat[i][0]) * math.pow(dY, self.lat[i][1]) )
+        for l in range(len(Lpq)):
+            lam = lam + ( Lpq[l] * dX**Lp[l] * dY**Lq[l] )
+        lam = self.lam0 + lam / 3600
 
-        return round(self.GpsOriginLat + ( a / 3600 ), 9)
+        return [phi,lam]
 
-    def toLon(self,rdX,rdY):
-        a = 0
-        dX = 1E-5 * (rdX - self.RDOriginX)
-        dY = 1E-5 * (rdY - self.RDOriginY)
+    def fromWgsToRd( self, coords ):
         
-        for i in range(0,12):
-            a = a + ( self.lon[i][2] * math.pow(dX,self.lon[i][0]) * math.pow(dY, self.lon[i][1]) )
+        Rp = [0,1,2,0,1,3,1,0,2]
+        Rq = [1,1,1,3,0,1,3,2,3]
+        Rpq = [190094.945,-11832.228,-114.221,-32.391,-0.705,-2.340,-0.608,-0.008,0.148]
 
-        return round(self.GpsOriginLon + ( a / 3600 ), 9)
+        Sp = [1,0,2,1,3,0,2,1,0,1]
+        Sq = [0,2,0,2,0,1,2,1,4,4]
+        Spq = [309056.544,3638.893,73.077,-157.984,59.788,0.433,-6.439,-0.032,0.092,-0.054]
 
-    def main():
-        converter = Converter()
+        dPhi = 0.36 * ( coords[0] - self.phi0 )
+        dLam = 0.36 * ( coords[1] - self.lam0 )
 
-        ## Test (Rotterdam Centraal)
-        print(converter.toLat(91819, 437802))
-        print(converter.toLon(91819, 437802))
+        X = 0
+        Y = 0
+
+        for r in range( len( Rpq ) ):
+            X = X + ( Rpq[r] * dPhi**Rp[r] * dLam**Rq[r] ) 
+        X = self.X0 + X
+
+        for s in range( len( Spq ) ):
+            Y = Y + ( Spq[s] * dPhi**Sp[s] * dLam**Sq[s] )
+        Y = self.Y0 + Y
+
+        return [X,Y]
+
+def main(a,b):
+    # Rotterdam Centraal Station
+    coords = [a, b]
+    conv = RDWGSConverter()
+    wgsCoords = conv.fromRdToWgs( coords )
+    # Laat de coordinaten voor conversie en de coordinaten na dubbele conversie op het scherm zien
+    # om te bewijzen dat het een benadering betreft. Tot slot worden ook nog de WGS coordinaten weergegeven.
+    return wgsCoords 
 
 if __name__ == "__main__":
     main()
