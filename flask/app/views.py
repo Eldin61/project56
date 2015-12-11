@@ -1,7 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, request, session
+from flask import Flask, render_template, redirect, url_for, request, session, g
 from functools import wraps
 from app import app
 import analyse
+import sqlite3
 
 def login_required(f):
     @wraps(f)
@@ -12,6 +13,11 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
+database = "users.db"
+
+def connect_db():
+    return sqlite3.connect("users.db")
+
 @app.route('/logout')
 @login_required
 def logout():
@@ -21,16 +27,17 @@ def logout():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        if request.form['email'] != 'admin' or request.form['password'] != 'admin':
+        g.db = connect_db()
+        username = request.form['email']
+        entry = g.db.execute('SELECT password from users where username=\'' + username + '\'')
+        password = entry.fetchall()[0][0]
+        g.db.close()
+        if request.form['password'] != password:
             print 'invalid Credentials'
         else:
             session['logged_in'] = True
             return redirect(url_for('index'))
     return render_template('pages/login.html', title="Login")
-
-@app.route("/test")
-def test():
-    return 'lelelelel'
 
 @app.route('/')
 @app.route('/index')

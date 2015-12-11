@@ -1,8 +1,11 @@
 from flask import Flask, send_from_directory
 import os
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
 app.config.from_object('config')
+
+from app import views
+
 
 @app.route('/bower_components/<path:path>')
 def send_bower(path):
