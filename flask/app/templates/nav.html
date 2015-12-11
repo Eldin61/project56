@@ -10,7 +10,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index">SB Admin v2.0</a>
+        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -215,7 +215,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -239,31 +239,33 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        {{nav_link(name="Flot Charts", url="flot", active=name)}}
-                        {{nav_link(name="Morris.js Charts", url="morris", active=name)}}
+						{{nav_link(name="Car Status", url="cars.html", active=name)}}
+					    {{nav_link(name="Current Analyses", url="graphs.html", active=name)}}
+                        {{nav_link(name="Flot Charts", url="flot.html", active=name)}}
+                        {{nav_link(name="Morris.js Charts", url="morris.html", active=name)}}
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="tables"><i class="fa fa-table fa-fw"></i> Tables</a>
+                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
                 </li>
                 <li>
-                    <a href="forms"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        {{nav_link(name="Panels and Wells", url="panels-wells", active=name)}}
-                        {{nav_link(name="Buttons", url="buttons", active=name)}}
-                        {{nav_link(name="Notifications", url="notifications", active=name)}}
-                        {{nav_link(name="Typography", url="typography", active=name)}}
-                        {{nav_link(name="Icons", url="icons", active=name)}}
-                        {{nav_link(name="Grid", url="grid", active=name)}}
+                        {{nav_link(name="Panels and Wells", url="panels-wells.html", active=name)}}
+                        {{nav_link(name="Buttons", url="buttons.html", active=name)}}
+                        {{nav_link(name="Notifications", url="notifications.html", active=name)}}
+                        {{nav_link(name="Typography", url="typography.html", active=name)}}
+                        {{nav_link(name="Icons", url="icons.html", active=name)}}
+                        {{nav_link(name="Grid", url="grid.html", active=name)}}
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
@@ -304,8 +306,8 @@
                 {% endif %}
                     <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        {{nav_link(name="Blank Page", url="blank", active=name)}}
-                        {{nav_link(name="Login Page", url="login", active=name)}}
+                        {{nav_link(name="Blank Page", url="blank.html", active=name)}}
+                        {{nav_link(name="Login Page", url="login.html", active=name)}}
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>

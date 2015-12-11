@@ -1,0 +1,118 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>Car Status</b>
+							</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+						<!-- 	to make sure it works :
+											{% for row in status %}	
+											
+															{{ row }}								
+														{% endfor %}-->					
+						{% for row in unitid %}	
+								<!--	status count = {{status[loop.index-1]}}	/{{statuscount}}
+									id count = {{unitid[loop.index-1]}}	/{{unitcount}}	-->
+							{% if status[loop.index-1] == true %}
+							    <div class="col-lg-4">
+									<div class="panel panel-green">	
+										<div class="panel-heading">
+										<center>	{{ row }}  </center>
+										</div>
+										<div class="panel-body">
+										<center>	<p><img src="http://www.gla3tradena.com/SiteAssets/the-talk-(2)/car%20button.jpg" style="max-width:25%"><p> </center>
+										</div>
+										
+										<div class="panel-footer">
+										<center>Status : Active</center>
+										</div>
+										
+										<div class="panel-footer">
+											<form role="form" method='POST'>
+												<center>
+													<button input type="submit" name="submit" value="{{loop.index-1}}" class="btn btn-success" >More Info</button>
+												</center> 
+											</form>
+										</div>
+										
+									</div>
+								<!-- /.col-lg-4 -->
+								</div>
+							{% else %}
+							    <div class="col-lg-4">
+									<div class="panel panel-red">	
+										<div class="panel-heading">
+										<center>	{{ row }}  </center>
+										</div>
+										<div class="panel-body">
+										<center>	<p><img src="http://www.gla3tradena.com/SiteAssets/the-talk-(2)/car%20button.jpg" style="max-width:25%"><p> </center>
+										</div>
+										
+										<div class="panel-footer">
+										<center>Status : Not Active</center>
+										</div>
+										
+										<div class="panel-footer">
+											<form role="form" method='POST'>
+												<center>
+													<button input type="submit" name="submit" value="{{loop.index-1}}" class="btn btn-danger" >More Info</button>
+												</center> 
+											</form>						
+										</div>
+										
+									</div>
+								<!-- /.col-lg-4 -->
+								</div>
+							{% endif %}
+							
+		
+							
+							{% endfor %}
+					
+					
+							
+							<!-- /.col-lg-6 -->
+							</div>
+						<!-- /.row -->
+						</div>
+					<!-- /#page-wrapper -->
+
+					</div>						
+                <!-- /.col-lg-6 -->
+				</div>
+            <!-- /.row -->
+			</div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+{% endblock %}
+
+{% block pagescript %}
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/bower_components/raphael/raphael-min.js"></script>
+	<!-- Lazy refresh force -->
+	<script>
+		setTimeout(function(){
+			window.location.reload(1);
+		}, 12000); 
+
+		openNewWindow = function()
+		{
+		window.location.replace('carinfo.html');
+		};
+
+
+		// refresh every 6000ms 
+	</script>
+
+{% endblock %}

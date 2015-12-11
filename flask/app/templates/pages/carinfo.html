@@ -1,0 +1,174 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<center><b> {{int_carinfo}} </b></center>
+							</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+<!-- table unit status -->	
+			<div class="panel panel-default">
+                <div class="panel-heading">
+                       <center>      Status : </center>
+                </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+       
+                                    <tbody>
+                                        <tr class="success">
+                                         <td><center> Unit ID</center> </td>
+                                         <td><center>{{gieflist[0]}}</center></td>
+                                        </tr>
+                                        <tr class="info">
+                                         <td><center> {{gieflist[1]}}</center> </td>
+                                         <td><center>{{gieflist[2]}}</center></td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td><center> Date</center> </td>
+                                            <td><center> {{gieflist[3]}}</center> </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td><center> Time</td>
+                                            <td><center> {{gieflist[4]}}</center> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div></center>
+                            <!-- /.table-responsive -->
+                        </div>
+						
+                        <!-- /.panel-body -->
+            </div>
+		<div class="panel panel-white">
+		<!-- google maps for flask https://pypi.python.org/pypi/Flask-GoogleMaps -->
+			<center>
+		<!--BRACKET BRACKET googlemap("my_awesome_map", lat= 51.314293867352156, lng=6.072404739820687, markers=[(51.314293867352156, 6.072404739820687)]) BRACKETBRACKET -->
+			</center>
+	
+		</div> 
+
+
+
+<!-- table unit location -->	
+			
+			<div class="panel panel-default">
+                <div class="panel-heading">
+                       <center>      Location : </center>
+                </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+       
+                                    <tbody>
+                                        <tr class="success">
+                                         <td><center> X Axis</center> </td>
+                                         <td><center>{{gieflist[5]}}</center></td>
+                                        </tr>
+                                        <tr class="info">
+                                         <td><center> X Axis</center> </td>
+                                         <td><center>{{gieflist[6]}}</center></td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td><center> Speed</center> </td>
+                                            <td><center> {{gieflist[7]}}</center> </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td><center> Course</td>
+                                            <td><center> {{gieflist[8]}}°</center> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div></center>
+                            <!-- /.table-responsive -->
+                        </div>
+						
+                        <!-- /.panel-body -->
+            </div>
+                    <!-- /.panel -->
+					
+<!-- table unit tracking -->	
+
+<div class="panel panel-default">
+                <div class="panel-heading">
+                       <center>      Tracking Information : </center>
+                </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+       
+                                    <tbody>
+                                        <tr class="success">
+                                         <td><center> Satalites Tracking Unit </center> </td>
+                                         <td><center>{{gieflist[9]}}</center></td>
+                                        </tr>
+                                        <tr class="info">
+                                         <td><center> Hdop </center> </td>
+                                         <td><center>{{gieflist[10]}}</center></td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td><center> Quality</center> </td>
+                                            <td><center> {{gieflist[11]}}</center> </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div></center>
+                            <!-- /.table-responsive -->
+                        </div>
+						
+                        <!-- /.panel-body -->
+            </div>
+                    <!-- /.panel -->
+	
+					
+							
+							<!-- /.col-lg-6 -->
+							</div>
+						<!-- /.row -->
+						</div>
+					<!-- /#page-wrapper -->
+
+					</div>						
+                <!-- /.col-lg-6 -->
+				</div>
+            <!-- /.row -->
+			</div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+{% endblock %}
+
+{% block pagescript %}
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/bower_components/raphael/raphael-min.js"></script>
+	<!-- Google JavaScript -->
+   <script type="text/javascript" 
+           src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<!-- Lazy refresh force -->
+	<script>
+		setTimeout(function(){
+			window.location.reload(1);
+		}, 12000); 
+
+		openNewWindow = function()
+		{
+		window.location.replace('carinfo.html');
+		};
+
+
+		// refresh every 6000ms 
+	</script>
+{% endblock %}
