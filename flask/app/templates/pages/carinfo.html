@@ -52,7 +52,10 @@
 		<!-- google maps for flask https://pypi.python.org/pypi/Flask-GoogleMaps -->
 		<center> Last Know Position
 			<center>
-		{{ googlemap("my_awesome_map", lat= gieflist[12], lng=gieflist[13], markers=[(gieflist[12], gieflist[13]),
+		{{ googlemap("my_awesome_map",
+		lat= gieflist[12], lng=gieflist[13],
+		style="height:400px;width:800px",
+		markers=[(gieflist[12], gieflist[13]),
 																													]) }}
 			</center>
 	
@@ -136,9 +139,41 @@
                             </div></center>
                             <!-- /.table-responsive -->
                         </div>
+						<!----------------------------->
+					<div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> GPS Coverage Unit
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="#">Show All Connections</a>
+                                </li>
+                                <li><a href="#">Show Good Connections</a>
+                                </li>
+                                <li><a href="#">Show Decent Connections</a>
+                                </li>
+							     <li><a href="#">Show Bad Connections</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+										
 									<center> Known Locations
-		{{ googlemap("GPSActivity", lat= trackinghistory_list[0][0], lng=trackinghistory_list[0][1], markers=trackinghistory_list) }}
+		{{ googlemap("GPSActivity",
+		lat= gieflist[12],
+		lng=gieflist[13],
+		zoom = 9,
+		style="height:400px;width:800px",
+		markers=trackinghistory_list) }}
 			</center>
+                </div>
+						<!------------------------------->
+						
+
                         <!-- /.panel-body -->
             </div>
                     <!-- /.panel -->

@@ -56,7 +56,6 @@ class Analyse:
 				unitstatus_list.append(item['value'])							
 				unitstatus_list.append(item['dat'])
 				unitstatus_list.append(item['tim'])	
-				print 'convert :'
 				intx = float(item['rdx'])
 				inty = float(item['rdy'])
 				
@@ -92,7 +91,6 @@ class Analyse:
 					
 				convertlist = [intx,inty]
 				newcoords = fromRdToWgs(convertlist)
-				print newcoords
 				unitstatus_list.append(item['rdx'])	
 				unitstatus_list.append(item['rdy'])							
 				unitstatus_list.append(item['speed'])
@@ -102,21 +100,24 @@ class Analyse:
 				unitstatus_list.append(item['quality'])	
 				unitstatus_list.append(newcoords[0])	
 				unitstatus_list.append(newcoords[1])
-				print 'done'
 				
 			except:
 				unitstatus_list.append("Unknown")
 				pass
 		return unitstatus_list
+		
 	@staticmethod		
 	def trackinghistory_method(unitid):
-		trackinghistory_list = list()
+		trackinghistory_dict = {}
+		#trackinghistory_list = list()
 		url = 'http://145.24.222.121/index.php/'+str(unitid)
-		jsonlist = loads(urlopen(url).read()) 
+		jsonlist = loads(urlopen(url).read())
+		loopcount = 1;
 		try:
 			for item in jsonlist['data']:
 				intx = float(item['rdx'])
 				inty = float(item['rdy']) 
+				intsatalite = int(item['numsatalites'])
 				def fromRdToWgs(  coords ):
 					X0      = 155000
 					Y0      = 463000
@@ -149,11 +150,26 @@ class Analyse:
 			
 				convertlist = [intx,inty]
 				newcoords = fromRdToWgs(convertlist)
-				trackinghistory_list.append(newcoords)
+				if intsatalite == 0:
+					url = 'http://i849.photobucket.com/albums/ab58/reneheijnen/mark4/blackarea'+str(loopcount)+'.png'
+					loopcount +=1
+					trackinghistory_dict.update({url:[newcoords]})		
+				elif intsatalite < 5:
+					url = 'http://i849.photobucket.com/albums/ab58/reneheijnen/mark4/redarea'+str(loopcount)+'.png'
+					loopcount +=1
+					trackinghistory_dict.update({url:[newcoords]})					
+				elif intsatalite < 8:
+					url = 'http://i849.photobucket.com/albums/ab58/reneheijnen/mark4/yellowarea'+str(loopcount)+'.png'
+					loopcount +=1
+					trackinghistory_dict.update({url:[newcoords]})		
+				elif intsatalite > 8:
+					url = 'http://i849.photobucket.com/albums/ab58/reneheijnen/mark4/greenarea'+str(loopcount)+'.png'
+					loopcount +=1
+					trackinghistory_dict.update({url:[newcoords]})		
+				#print trackinghistory_dict
 		except:
-			trackinghistory_list.append("No Data")
 			pass
-		return trackinghistory_list
+		return trackinghistory_dict
 	#latestunitinfo_method(14100071)
 	#coordslist =[105921.237079477,479858.598919381]
 	#newlist = fromRdToWgs(coordslist)

@@ -88,8 +88,7 @@ def cars():
 		if request.form['submit'] == '0':
 			int_carinfo = unitid[0]
 			gieflist = analyseobject.latestunitinfo_method(int_carinfo)
-			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)
-			print trackinghistory_list			
+			trackinghistory_list = analyseobject.trackinghistory_method(int_carinfo)		
 			return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status",int_carinfo=int_carinfo,gieflist=gieflist,trackinghistory_list=trackinghistory_list)
 			pass
 		elif request.form['submit'] == '1':
