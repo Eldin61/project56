@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="$(if [ "$OSTYPE" "==" "cygwin" ]; then cygpath -u 'C:\Users\Eldin\Documents\sb-admin-2-python-master\flask'; else echo '/C/Users/Eldin/Documents/sb-admin-2-python-master/flask'; fi;)"
+VIRTUAL_ENV="$(if [ "$OSTYPE" "==" "cygwin" ]; then cygpath -u 'C:\Users\Eldin\Documents\School\project5\flask\flask'; else echo '/C/Users/Eldin/Documents/School/project5/flask/flask'; fi;)"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
