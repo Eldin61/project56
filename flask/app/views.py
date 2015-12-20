@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, session, g
 from functools import wraps
 from app import app
 import analyse
-import sqlite3
+import psycopg2
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
 from flask import request
@@ -16,10 +16,9 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
-database = "users.db"
 
 def connect_db():
-    return sqlite3.connect("users.db")
+    return psycopg2.connect(database='users', user='eldin', password='root', host='127.0.0.1', port='5432')
 
 @app.route('/logout')
 @login_required
@@ -30,16 +29,22 @@ def logout():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        g.db = connect_db()
+    	db = connect_db()
+        cur = db.cursor()
+
         username = request.form['email']
-        entry = g.db.execute('SELECT password from users where username=\'' + username + '\'')
-        password = entry.fetchall()[0][0]
-        g.db.close()
+        cur.execute("SELECT password from users where username=\'" + username + "\'")
+        rows = cur.fetchall()
+        for row in rows:
+        	password = row[0]
+        db.commit()
+        db.close()
         if request.form['password'] != password:
             print 'invalid Credentials'
         else:
             session['logged_in'] = True
             return redirect(url_for('index'))
+        
     return render_template('pages/login.html', title="Login")
 
 @app.route('/')
