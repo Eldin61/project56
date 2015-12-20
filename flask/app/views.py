@@ -18,7 +18,7 @@ def login_required(f):
 
 
 def connect_db():
-    return psycopg2.connect(database='users', user='eldin', password='root', host='127.0.0.1', port='5432')
+    return psycopg2.connect(database='users', user='userdb', password='root', host='127.0.0.1', port='5432')
 
 @app.route('/logout')
 @login_required
