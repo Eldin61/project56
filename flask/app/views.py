@@ -49,11 +49,12 @@ def login():
 
 @app.route('/')
 @app.route('/index.html')
- 
+
 def index():
     analyseobject = analyse.Analyse()
     unitid = analyseobject.allunitid_method()
-    return render_template('pages/index.html', title="Home", header="Home", unitid = unitid)
+    status = analyseobject.carstatus_method()
+    return render_template('pages/index.html', title="Home", header="Home", unitid = unitid,status = status)
 
 @app.route('/blank.html')
  
