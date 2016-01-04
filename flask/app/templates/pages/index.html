@@ -61,10 +61,13 @@
 						    <li class="timeline-inverted">
 							{% if status[loop.index-1] == true %}
                             <div class="timeline-badge success">
+							<i class="fa  fa-check"></i>
+
 							{% else %}	
 							<div class="timeline-badge danger">
+							<i class="fa fa-power-off"></i>
+
 							{% endif %}
-							<i class="fa fa-check"></i>
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -79,19 +82,18 @@
 									</div>
                             </div>
                         </li>
-						
-					
-						
+
 						{% else %}
 
                         <li>							 
 
                             {% if status[loop.index-1] == true %}
                             <div class="timeline-badge success">
+							<i class="fa  fa-check"></i>							
 							{% else %}
 							<div class="timeline-badge danger">
+							<i class="fa fa-power-off"></i>						
 							{% endif %}
-							<i class="fa fa-check"></i>
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">

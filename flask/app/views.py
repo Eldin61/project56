@@ -62,9 +62,16 @@ def blank():
     return render_template('pages/blank.html', title="Blank", header="Blank", nav="Blank Page")
 
 @app.route('/flot.html')
- 
 def flot():
     return render_template('pages/flot.html', title="Flot", header="Flot Charts", nav="Flot Page")
+@app.route('/meta.html')
+ 
+def meta():
+    return render_template('pages/meta.html', title="Meta Data", header="Meta", nav="Meta Page")
+	
+@app.route('/metaspecials.html')
+def metaspecial():
+    return render_template('pages/metaspecials.html', title="Meta Data Specials", header="Meta Specials", nav="Meta Specials Page")
 
 @app.route('/morris.html')
  
