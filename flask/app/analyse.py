@@ -29,6 +29,40 @@ class Analyse:
 				pass				
 		return sataliteinfo
 
+	def allcarstatus_method(x): ########################
+		statusinfo_list = list()
+		META = []
+		url = 'http://145.24.222.121/index.php/unitid'
+		jsonlist = loads(urlopen(url).read()) 
+		count = 0
+		for item in jsonlist['data']:
+			url = 'http://145.24.222.121/index.php/' + str(item['unitid']) + 'status'
+			jsonlistnested = loads(urlopen(url).read())
+
+			try:
+				for item in jsonlistnested['data']:
+					temp = []
+					statusinfo_list = list()
+					statusinfo_list.append(item['unitid'])
+					statusinfo_list.append(item['tim'])
+					statusinfo_list.append(item['dat'])
+					statusinfo_list.append(item['port'])
+					statusinfo_list.append(item['value'])
+					statusinfo_list.append(item['rdx'])
+					statusinfo_list.append(item['rdy'])
+					statusinfo_list.append(item['speed'])
+					statusinfo_list.append(item['course'])
+					statusinfo_list.append(item['numsatalites'])
+					statusinfo_list.append(item['hdop'])
+					statusinfo_list.append(item['quality'])
+					temp.extend([statusinfo_list,count])
+					META.append(temp)
+					count = count+1
+			except:
+				statusinfo_list.append("Unknown")
+				pass
+		return META
+
 	def carstatus_method(e):
 		statusinfo_list = list()
 		url = 'http://145.24.222.121/index.php/unitid'

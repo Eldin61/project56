@@ -51,10 +51,17 @@ def login():
 @app.route('/index.html')
 
 def index():
+    counterlist = list()
+    counter = 0
     analyseobject = analyse.Analyse()
     unitid = analyseobject.allunitid_method()
     status = analyseobject.carstatus_method()
-    return render_template('pages/index.html', title="Home", header="Home", unitid = unitid,status = status)
+    for item in status:
+		counterlist.append(counter)
+		counter = counter +1
+		print counter
+    unitidinformation = analyseobject.allcarstatus_method()
+    return render_template('pages/index.html', title="Home", header="Home", unitid = unitid,status = status,unitidinformation = unitidinformation,counterlist=counterlist)
 
 @app.route('/blank.html')
  
