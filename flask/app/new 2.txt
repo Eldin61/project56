@@ -1,0 +1,70 @@
+	def dataentry_method(b):
+		sataliteinfo = list()
+		url = 'http://145.24.222.121/index.php/connectioncount'
+		jsonlist = loads(urlopen(url).read()) 
+		for w in jsonlist['data']:
+			sataliteinfo.append(w['count'])
+		return sataliteinfo
+			
+	def connectioncount_method(h):
+		sataliteinfo = list()
+		url = 'http://145.24.222.121/index.php/contruecount'
+		jsonlist = loads(urlopen(url).read()) 
+		for w in jsonlist['data']:
+			sataliteinfo.append(w['count'])
+		return sataliteinfo
+	
+	
+	    connectionscount = analyseobject.dataentry_method()
+    truecount = analyseobject.connectioncount_method()
+	
+	
+	
+	    Morris.Bar({
+        element: 'morris-bar-chart',
+        data: [{
+            y: {{ unitid[0] }},
+            a: {{ connectionscount[0] }},
+            b: {{ truecount[0] }},
+			c: 90
+        }, {
+            y: {{ unitid[1] }},
+            a: {{ connectionscount[1] }},
+            b: {{ truecount[1] }},
+			c: 22
+        }, {
+            y: {{ unitid[2] }},
+            a: {{ connectionscount[2] }},
+            b: {{ truecount[2] }},
+			c: 12
+        }, {
+            y: {{ unitid[3] }},
+            a: {{ connectionscount[3] }},
+            b: {{ truecount[3] }},
+			c: 23
+        }, {
+            y: {{ unitid[4] }},
+            a: {{ connectionscount[4] }},
+            b: {{ truecount[4] }},
+			c: 60
+        }, {
+            y: {{ unitid[5] }},
+            a: {{ connectionscount[5] }},
+            b: {{ truecount[5] }},
+			c: 50
+        }, {
+            y: {{ unitid[6] }},
+            a: {{ connectionscount[6] }},
+            b: {{ truecount[6] }},
+			c: 50
+        }],
+        xkey: 'y',
+        ykeys: ['a', 'b', 'c'],
+        labels: ['Database Entry Count', 'Power Count','WIPMilageWIP'],
+        hideHover: 'auto',
+        resize: true
+    });
+
+	
+	
+	

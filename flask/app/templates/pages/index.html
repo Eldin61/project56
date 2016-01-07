@@ -30,7 +30,7 @@
                     <div class="row">
 
                         <div class="col-lg-4">
-						 <i class="fa fa-globe fa-fw"></i> GPS
+						 <i class="fa fa-globe fa-fw"></i> Global Coverage
 
                     <div id="morris-donut-chart"> 
 					
@@ -215,47 +215,47 @@
 		colors: ['#FF0000','#008000','#FFFF00','#000000']
     });
 
-    Morris.Bar({
+     Morris.Bar({
         element: 'morris-bar-chart',
         data: [{
             y: {{ unitid[0] }},
-            a: 100,
-            b: 90,
+            a: {{ connectionscount[0] }},
+            b: {{ truecount[0] }},
 			c: 90
         }, {
             y: {{ unitid[1] }},
-            a: 75,
-            b: 65,
+            a: {{ connectionscount[1] }},
+            b: {{ truecount[1] }},
 			c: 22
         }, {
             y: {{ unitid[2] }},
-            a: 50,
-            b: 40,
+            a: {{ connectionscount[2] }},
+            b: {{ truecount[2] }},
 			c: 12
         }, {
             y: {{ unitid[3] }},
-            a: 75,
-            b: 65,
+            a: {{ connectionscount[3] }},
+            b: {{ truecount[3] }},
 			c: 23
         }, {
             y: {{ unitid[4] }},
-            a: 50,
-            b: 40,
+            a: {{ connectionscount[4] }},
+            b: {{ truecount[4] }},
 			c: 60
         }, {
             y: {{ unitid[5] }},
-            a: 75,
-            b: 65,
+            a: {{ connectionscount[5] }},
+            b: {{ truecount[5] }},
 			c: 50
         }, {
             y: {{ unitid[6] }},
-            a: 100,
-            b: 90,
+            a: {{ connectionscount[6] }},
+            b: {{ truecount[6] }},
 			c: 50
         }],
         xkey: 'y',
         ykeys: ['a', 'b', 'c'],
-        labels: ['Ignition count', 'Power count','Milage'],
+        labels: ['Database Entry Count', 'Power Count','WIPMilageWIP'],
         hideHover: 'auto',
         resize: true
     });

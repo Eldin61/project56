@@ -1,0 +1,2 @@
+'SELECT * FROM events INNER JOIN positions ON events.tim=positions.tim AND events.unitid = XXX AND positions.unitid = XXX;' => 'XXX',
+'SELECT * FROM events INNER JOIN positions ON events.tim = positions.tim AND events.unitid = XXX AND positions.unitid = XXX AND events.tim::time without time zone < CURRENT_TIMESTAMP::time without time zone ORDER BY events.tim DESC limit 1; => 'XXXstatus',

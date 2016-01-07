@@ -11,7 +11,22 @@ class Analyse:
 		    unitidlist.append(w['unitid'])							
 	    return unitidlist
 	
-	
+	def dataentry_method(b):
+		sataliteinfo = list()
+		url = 'http://145.24.222.121/index.php/connectioncount'
+		jsonlist = loads(urlopen(url).read()) 
+		for w in jsonlist['data']:
+			sataliteinfo.append(w['count'])
+		return sataliteinfo
+			
+	def connectioncount_method(h):
+		sataliteinfo = list()
+		url = 'http://145.24.222.121/index.php/contruecount'
+		jsonlist = loads(urlopen(url).read()) 
+		for w in jsonlist['data']:
+			sataliteinfo.append(w['count'])
+		return sataliteinfo
+		
 	def sataliteavarage_method(d):
 		sataliteinfo = list()
 		url = 'http://145.24.222.121/index.php/unitid'
