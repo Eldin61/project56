@@ -28,6 +28,35 @@ class Analyse:
 				sataliteinfo.append(0)
 				pass				
 		return sataliteinfo
+		
+	def connectedsatalites_method(ids):
+		connected = list()
+		url = 'http://145.24.222.121/index.php/unitid'
+		jsonlist = loads(urlopen(url).read()) 
+		blackList = 0
+		redList = 0
+		yellowList = 0 
+		greenList = 0
+		for w in jsonlist['data']:
+			url = 'http://145.24.222.121/index.php/' + str(w['unitid'])
+			jsonlistnested = loads(urlopen(url).read()) 	
+			try:				
+				for item in jsonlistnested['data']:
+					satalites = int(item['numsatalites'])
+					if satalites == 0:
+						blackList +=1
+					elif satalites < 5:
+						redList +=1
+					elif satalites < 8:
+						yellowList +=1
+					elif satalites > 8:
+						greenList +=1
+			except:	
+				print "oops"
+				pass
+		connected = [blackList, redList, yellowList, greenList]
+		print "test print", connected
+		return connected	
 
 	def allcarstatus_method(x): ########################
 		statusinfo_list = list()

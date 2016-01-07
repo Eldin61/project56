@@ -199,17 +199,17 @@
     Morris.Donut({
         element: 'morris-donut-chart',
         data: [{
-            label: "GPS Grade: C",
-            value: 23
+            label: "Less than 5",
+            value: {{connected[1]}}
         }, {
-            label: "GPS Grade: A",
-            value: 30
+            label: "8 or more",
+            value: {{connected[3]}}
         }, {
-            label: "GPS Grade: B",
-            value: 30
+            label: "5-8 satalites",
+            value: {{connected[2]}}
         }, {
-            label: "GPS Grade: F",
-            value: 30
+            label: "0 satalites",
+            value: {{connected[0]}}
         }],
         resize: true,
 		colors: ['#FF0000','#008000','#FFFF00','#000000']

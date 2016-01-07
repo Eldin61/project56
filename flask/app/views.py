@@ -56,12 +56,13 @@ def index():
     analyseobject = analyse.Analyse()
     unitid = analyseobject.allunitid_method()
     status = analyseobject.carstatus_method()
+    connected = analyseobject.connectedsatalites_method()
     for item in status:
 		counterlist.append(counter)
 		counter = counter +1
 		print counter
     unitidinformation = analyseobject.allcarstatus_method()
-    return render_template('pages/index.html', title="Home", header="Home", unitid = unitid,status = status,unitidinformation = unitidinformation,counterlist=counterlist)
+    return render_template('pages/index.html', title="Home", header="Home", unitid = unitid,status = status, connected = connected, unitidinformation = unitidinformation,counterlist=counterlist)
 
 @app.route('/blank.html')
  
