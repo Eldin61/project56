@@ -6,3 +6,4 @@ app.run(debug=True)
 #test voor commit
 #plz nu wel auto github
 #salty cunt
+# plz n more report plz
