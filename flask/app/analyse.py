@@ -10,6 +10,9 @@ class Analyse:
 	    for w in jsonlist['data']:
 		    unitidlist.append(w['unitid'])
 	    return unitidlist
+		
+	def jenkins():
+		return "plz work"
 	
 	def dataentry_method(b):
 		sataliteinfo = list()
