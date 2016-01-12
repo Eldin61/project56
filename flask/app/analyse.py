@@ -8,7 +8,7 @@ class Analyse:
 	    url = 'http://145.24.222.121/index.php/unitid'
 	    jsonlist = loads(urlopen(url).read()) 
 	    for w in jsonlist['data']:
-		    unitidlist.append(w['unitid'])							
+		    unitidlist.append(w['unitid'])
 	    return unitidlist
 	
 	def dataentry_method(b):
@@ -42,6 +42,7 @@ class Analyse:
 			except: 
 				sataliteinfo.append(0)
 				pass				
+		print sataliteinfo
 		return sataliteinfo
 		
 	def connectedsatalites_method(ids):
@@ -67,10 +68,8 @@ class Analyse:
 					elif satalites > 8:
 						greenList +=1
 			except:	
-				print "oops"
 				pass
 		connected = [blackList, redList, yellowList, greenList]
-		print "test print", connected
 		return connected	
 
 	def allcarstatus_method(x): ########################
