@@ -78,6 +78,7 @@ def flot():
 @app.route('/meta.html')
  
 def meta():
+    
     return render_template('pages/meta.html', title="Meta Data", header="Meta", nav="Meta Page")
 	
 @app.route('/metaspecials.html')
@@ -122,9 +123,17 @@ def cars():
 	    pass
 
 @app.route('/carinfo.html')
- 
 def carinfo():
     return render_template('pages/carinfo.html', title="Unit Info", header="Unit Info", nav="Car Status")
+	
+@app.route('/geolocationdata.html')
+def geolocationdata():
+    analyseobject = analyse.Analyse()
+    unitid = analyseobject.allunitid_method()
+    connectionlist = list()
+    for item in unitid:
+		connectionlist.append(analyseobject.geolocationtracker(item))
+    return render_template('pages/geolocationdata.html', title="geolocationdata", header="geolocationdata", nav="geolocationdata",connectionlist=connectionlist,unitid=unitid)
 
 @app.route('/tables.html')
  

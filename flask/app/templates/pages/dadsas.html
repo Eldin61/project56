@@ -18,50 +18,31 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Information</th>
-                                            <th>Type</th>
-                                            <th>Price</th>
+                                            <th>Quality</th>
+                                            <th>X</th>
+                                            <th>Y</th>
+                                            <th> </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-									{% for row in unitid %}
-                                        <tr class="odd gradeX">
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 4.0</td>
-                                            <td>Win 95+</td>
-                                            <td class="center">X</td>
-                                        </tr>
-                                     {% endfor %}  
+									{% for item in connectionlist %}
+                
 									<!------------>
 									    <tr class="odd gradeX">
-                                            <td>Car status</td>
-                                            <td>Current Car Unit Status Overview</td>
-                                            <td>Car/Unit Status</td>
+                                            <td>{{connectionlist[1][0][loop.index]}}</td>
+                                            <td>{{connectionlist[1][1][loop.index]}}</td>
+                                            <td>{{connectionlist[1][2][loop.index]}}</td>
+                                            <td class="center"> <center>
                                             <td class="center">
-												$15.999 
 												<div class="pull-right">
 												<button type="button" class="btn btn-outline btn-info"  data-toggle="modal" data-target="#myModal1">Order Now</button> 
 												<!-- Button trigger modal -->
 												</div>
 											</td>
                                         </tr>
-										<!-------------->
+                                     {% endfor %}  
 
-									    <tr class="odd gradeX">
-                                            <td>Geo Location of dead zones</td>
-                                            <td>Uses google maps to display dead zones (extremely low satalite tracking areas)</td>
-                                            <td>GPS</td>
-                                            <td class="center">
-												$18.999 
-												<div class="pull-right">
-												<button type="button" class="btn btn-outline btn-info"  data-toggle="modal" data-target="#myModal2">Order Now</button> 
-												<!-- Button trigger modal -->
-
-
-												</div>
-											</td>
-                                        </tr>
+		
 
 										<!-------------->										
                                     </tbody>
@@ -81,8 +62,8 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            
-<!-- Modal Part 1 -->
+
+ <!-- Modal Part 1 -->
                             <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -161,9 +142,6 @@
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-		function geopage(){
-			window.open("/geolocationdata.html");
-		}
 	
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
@@ -172,4 +150,4 @@
     });
     </script>
 
-{% endblock %}
+{% endblock %}                         
