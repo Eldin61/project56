@@ -9,4 +9,4 @@ class ConnectedSatTest(TestCase):
 
  		a = analyse.Analyse()
  		self.assertEqual(a.connectedsatalites_method()[0], 150)
-    	print "hoi"
+ 		#test purpose
