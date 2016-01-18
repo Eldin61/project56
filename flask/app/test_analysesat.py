@@ -5,7 +5,8 @@ __author__ = 'Orlando'
 
 
 class ConnectedSatTest(TestCase):
-  def test_connectedsatalites_method(self):
+	def test_connectedsatalites_method(self):
 
-    a = analyse.Analyse()
-    self.assertEqual(a.connectedsatalites_method()[0], 150)
+ 		a = analyse.Analyse()
+ 		self.assertEqual(a.connectedsatalites_method()[0], 150)
+    	print "hoi"
