@@ -21,3 +21,5 @@ def send_js(path):
     return send_from_directory(os.path.join(app.root_path, 'js'), path)
 
 from app import views
+
+# showcase opdrachtD
