@@ -1,5 +1,7 @@
 from unittest import TestCase
 from analyse import Analyse
+from json import loads
+from urllib import urlopen
 
 __author__ = 'Orlando'
 
@@ -9,6 +11,10 @@ class TestAnalyse(TestCase):
         o = Analyse()
 
         methodid = o.allunitid_method()
-        actualid = [14100071, 14120026, 14120031, 14120029, 15030001, 14100042, 999, 14100064, 14100015, 15030000]
+        url = 'http://145.24.222.121/index.php/unitid'
+        jsonlist = loads(urlopen(url).read())
+        listlength = 0
+        for w in jsonlist['data']:
+            listlength +=1
 
-        self.assertEquals(methodid, actualid)
+        self.assertEquals(len(methodid), listlength)
