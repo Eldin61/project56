@@ -164,18 +164,18 @@ public class TableManager {
         final double rdy;
         final int speed;
         final int course;
-        final int numSatellites;
+        final int numSatalites;
         final boolean hdop;
         final String quality;
 
-        public PositionTable(Timestamp dateTime, int unitId, double rdx, double rdy, int speed, int course, int numSatellites, boolean hdop, String quality) {
+        public PositionTable(Timestamp dateTime, int unitId, double rdx, double rdy, int speed, int course, int numSatalites, boolean hdop, String quality) {
             this.dateTime = dateTime;
             this.unitId = unitId;
             this.rdx = rdx;
             this.rdy = rdy;
             this.speed = speed;
             this.course = course;
-            this.numSatellites = numSatellites;
+            this.numSatalites = numSatalites;
             this.hdop = hdop;
             this.quality = quality;
         }
@@ -204,8 +204,8 @@ public class TableManager {
             return course;
         }
 
-        public int getNumSatellites() {
-            return numSatellites;
+        public int getNumSatalites() {
+            return numSatalites;
         }
 
         public boolean getHdop() {
@@ -218,7 +218,7 @@ public class TableManager {
 
         @Override
         public String toString() {
-            return dateTime + ", " + unitId + ", " + rdx + ", " + rdy + ", " + speed + ", " + course + ", " + numSatellites + ", " + hdop + ", " + quality;
+            return dateTime + ", " + unitId + ", " + rdx + ", " + rdy + ", " + speed + ", " + course + ", " + numSatalites + ", " + hdop + ", " + quality;
         }
     }
 }

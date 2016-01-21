@@ -23,7 +23,7 @@ public class PositionsThread extends TableThread {
                     "rdy DOUBLE PRECISION, " +
                     "speed INTEGER, " +
                     "course INTEGER, " +
-                    "numsatellites INTEGER, " +
+                    "numsatalites INTEGER, " +
                     "hdop BOOLEAN, " +
                     "quality CHARACTER VARYING, " +
                     "PRIMARY KEY(datetime, unitid))");
@@ -39,7 +39,7 @@ public class PositionsThread extends TableThread {
         Long curDate = new Date().getTime();
 
         try (PreparedStatement ps = con.prepareStatement("INSERT INTO positions "
-                + "(datetime,unitid,rdx,rdy,speed,course,numsatellites,hdop,quality) "
+                + "(datetime,unitid,rdx,rdy,speed,course,numsatalites,hdop,quality) "
                 + "VALUES (?,?,?,?,?,?,?,?,?)")) {
             con.setAutoCommit(false);
             for (Object p : list) {
@@ -51,7 +51,7 @@ public class PositionsThread extends TableThread {
                 ps.setDouble(4, pTable.getRdy());
                 ps.setInt(5, pTable.getSpeed());
                 ps.setInt(6, pTable.getCourse());
-                ps.setInt(7, pTable.getNumSatellites());
+                ps.setInt(7, pTable.getNumSatalites());
                 ps.setBoolean(8, pTable.getHdop());
                 ps.setString(9, pTable.getQuality());
                 ps.addBatch();
