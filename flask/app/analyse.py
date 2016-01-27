@@ -6,10 +6,10 @@ class Analyse:
 	
 	def allunitid_method(f):
 	    unitidlist = list()
-	    url = 'http://145.24.222.121/index.php/unitid'
-	    jsonlist = loads(urlopen(url).read()) 
-	    for w in jsonlist['data']:
-		    unitidlist.append(w['unitid'])
+	    url = 'http://145.24.222.121/index.php/unitid' #url link to rest api data
+	    jsonlist = loads(urlopen(url).read()) #load all the data from the url
+	    for w in jsonlist['data']: #loop through data
+		    unitidlist.append(w['unitid']) #add the unitid's to list
 	    return unitidlist
 	
 	def dataentry_method(b):
@@ -33,13 +33,13 @@ class Analyse:
 		url = 'http://145.24.222.121/index.php/unitid'
 		jsonlist = loads(urlopen(url).read()) 
 		for w in jsonlist['data']:
-			url = 'http://145.24.222.121/index.php/' + str(w['unitid'])
+			url = 'http://145.24.222.121/index.php/' + str(w['unitid']) #creates a url by looping through the list of unitid's and tostrings them
 			jsonlistnested = loads(urlopen(url).read()) 
 			try :
 				counter_int = 0
 				for item in jsonlistnested['data']:
-					counter_int += item['numsatalites']
-				sataliteinfo.append(counter_int / len(jsonlistnested['data']))    
+					counter_int += item['numsatalites'] #add numsatalites count to counter
+				sataliteinfo.append(counter_int / len(jsonlistnested['data'])) #calculates average by dividing total by number of times looped through data    
 			except: 
 				sataliteinfo.append(0)
 				pass				
@@ -57,7 +57,8 @@ class Analyse:
 		for w in jsonlist['data']:
 			url = 'http://145.24.222.121/index.php/' + str(w['unitid'])
 			jsonlistnested = loads(urlopen(url).read()) 	
-			try:				
+			try:
+				#checks every entry and checks the connected num of sattalites and adds a count to the corresponding list
 				for item in jsonlistnested['data']:
 					satalites = int(item['numsatalites'])
 					if satalites == 0:
@@ -84,6 +85,7 @@ class Analyse:
 			jsonlistnested = loads(urlopen(url).read())
 
 			try:
+				#collects all the available data from the url
 				for item in jsonlistnested['data']:
 					temp = []
 					statusinfo_list = list()
@@ -131,18 +133,18 @@ class Analyse:
 		trackingsatalites = list()	
 		trackingunitid = list()
 		csv = open("app\csv.txt", "wb")
-		url = 'http://145.24.222.121/index.php/'+str(unitid)
+		url = 'http://145.24.222.121/index.php/'+str(unitid)	#opens url of corresponding unitid
 		jsonlist = loads(urlopen(url).read())
 		loopcount = 1;
 		try:
 			for item in jsonlist['data']:
-				intx = float(item['rdx'])
+				intx = float(item['rdx'])	#gets x coordinate and turns it into a float
 				inty = float(item['rdy']) 
 				intsatalite = int(item['numsatalites'])
 				
 				
-				convertlist = [intx,inty]
-				newcoords = Analyse.fromRdToWgs(convertlist)
+				convertlist = [intx,inty]	#add both coordinates to a list
+				newcoords = Analyse.fromRdToWgs(convertlist)	#calls the converter method to convert coordinates
 				trackingsatalites.append(intsatalite)
 				trackinghistoryX.append(newcoords[0])
 				trackinghistoryY.append(newcoords[1])
@@ -161,7 +163,7 @@ class Analyse:
 		return trackinghistory_list
 	
 	@staticmethod
-	def fromRdToWgs(  coords ):
+	def fromRdToWgs(  coords ): #converts Rijksdriehoek coordinates to GPS
 		X0      = 155000
 		Y0      = 463000
 		phi0    = 52.15517440
@@ -243,7 +245,7 @@ class Analyse:
 				if intsatalite == 0:
 					url = 'http://i849.photobucket.com/albums/ab58/reneheijnen/mark4/blackarea'+str(loopcount)+'.png'
 					loopcount +=1
-					trackinghistory_dict.update({url:[newcoords]})		
+					trackinghistory_dict.update({url:[newcoords]})	#adds unique url as key with value = converted coordinates to a dictionary		
 				elif intsatalite < 5:
 					url = 'http://i849.photobucket.com/albums/ab58/reneheijnen/mark4/redarea'+str(loopcount)+'.png'
 					loopcount +=1
