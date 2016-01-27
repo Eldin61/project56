@@ -153,7 +153,6 @@ class Analyse:
 			
 
 		except:
-		except:
 			pass
 		for item in trackingsatalites:  # sorts the lists and prints them in csv in order
 			trackinghistory_list.append(trackingsatalites[item])			
