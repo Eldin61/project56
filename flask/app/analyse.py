@@ -153,14 +153,17 @@ class Analyse:
 			
 
 		except:
+		except:
 			pass
-		trackinghistory_list.append(trackingsatalites)			
-		trackinghistory_list.append(trackinghistoryX)
-		trackinghistory_list.append(trackinghistoryY)
-		trackinghistory_list.append(trackingunitid)
-		for item in trackinghistory_list:
-				print>>csv, item
+		for item in trackingsatalites:  # sorts the lists and prints them in csv in order
+			trackinghistory_list.append(trackingsatalites[item])			
+			trackinghistory_list.append(trackinghistoryX[item])
+			trackinghistory_list.append(trackinghistoryY[item])
+			trackinghistory_list.append(trackingunitid[item])
+		print>>csv, trackinghistory_list
+		print trackinghistory_list
 		return trackinghistory_list
+	
 	
 	@staticmethod
 	def fromRdToWgs(  coords ): #converts Rijksdriehoek coordinates to GPS
