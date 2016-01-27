@@ -4,7 +4,12 @@ from urllib import urlopen
 unitidlist = list()
 
 # w = for every item
-
+# TEST SCRIPT FOR PARSING DATA FROM REST - NOT IN USE !!
+# TEST SCRIPT FOR PARSING DATA FROM REST - NOT IN USE !!
+# TEST SCRIPT FOR PARSING DATA FROM REST - NOT IN USE !!
+# TEST SCRIPT FOR PARSING DATA FROM REST - NOT IN USE !!
+# TEST SCRIPT FOR PARSING DATA FROM REST - NOT IN USE !!
+# TEST SCRIPT FOR PARSING DATA FROM REST - NOT IN USE !!
 # Test methods to get all data from 1 unit id
 def allunitid_method():
 	url = 'http://145.24.222.121/index.php/unitid'
