@@ -132,7 +132,7 @@ class Analyse:
 		trackinghistoryY = list()
 		trackingsatalites = list()	
 		trackingunitid = list()
-		csv = open("app/csv.txt", "r+")
+		csv = open("/var/www/project56/flask/app/csv.txt", "r+")
 		url = 'http://145.24.222.121/index.php/'+str(unitid)	#opens url of corresponding unitid
 		jsonlist = loads(urlopen(url).read())
 		loopcount = 1;
