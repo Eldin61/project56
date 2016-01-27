@@ -73,7 +73,7 @@ class Analyse:
 		connected = [blackList, redList, yellowList, greenList]
 		return connected	
 	
-	def allcarstatus_method(x): ########################
+	def allcarstatus_method(x): 
 		statusinfo_list = list()
 		META = []
 		url = 'http://145.24.222.121/index.php/unitid'
@@ -122,7 +122,6 @@ class Analyse:
 				pass
 		return statusinfo_list
 		
-###############################################################	
 	
 	@staticmethod	
 	def geolocationtracker(unitid):
@@ -140,39 +139,10 @@ class Analyse:
 				intx = float(item['rdx'])
 				inty = float(item['rdy']) 
 				intsatalite = int(item['numsatalites'])
-				def fromRdToWgs(  coords ):
-					X0      = 155000
-					Y0      = 463000
-					phi0    = 52.15517440
-					lam0    = 5.38720621
-		
-					Kp = [0,2,0,2,0,2,1,4,2,4,1]
-					Kq = [1,0,2,1,3,2,0,0,3,1,1]
-					Kpq = [3235.65389,-32.58297,-0.24750,-0.84978,-0.06550,-0.01709,-0.00738,0.00530,-0.00039,0.00033,-0.00012]
-
-					Lp = [1,1,1,3,1,3,0,3,1,0,2,5]
-					Lq = [0,1,2,0,3,1,1,2,4,2,0,0]
-					Lpq = [5260.52916,105.94684,2.45656,-0.81885,0.05594,-0.05607,0.01199,-0.00256,0.00128,0.00022,-0.00022,0.00026]
-
-					dX = 1E-5 * ( coords[0] -X0 )
-					dY = 1E-5 * ( coords[1] -Y0 )
-					
-					phi = 0
-					lam = 0
-
-					for k in range(len(Kpq)):
-						phi = phi + ( Kpq[k] * dX**Kp[k] * dY**Kq[k] )
-					phi = phi0 + phi / 3600
-
-					for l in range(len(Lpq)):
-						lam = lam + ( Lpq[l] * dX**Lp[l] * dY**Lq[l] )
-					lam = lam0 + lam / 3600
-
-					return [phi,lam]
-
+				
 				
 				convertlist = [intx,inty]
-				newcoords = fromRdToWgs(convertlist)
+				newcoords = Analyse.fromRdToWgs(convertlist)
 				trackingsatalites.append(intsatalite)
 				trackinghistoryX.append(newcoords[0])
 				trackinghistoryY.append(newcoords[1])
@@ -189,8 +159,37 @@ class Analyse:
 		for item in trackinghistory_list:
 				print>>csv, item
 		return trackinghistory_list
+	
+	@staticmethod
+	def fromRdToWgs(  coords ):
+		X0      = 155000
+		Y0      = 463000
+		phi0    = 52.15517440
+		lam0    = 5.38720621
 		
-###############################################################	
+		Kp = [0,2,0,2,0,2,1,4,2,4,1]
+		Kq = [1,0,2,1,3,2,0,0,3,1,1]
+		Kpq = [3235.65389,-32.58297,-0.24750,-0.84978,-0.06550,-0.01709,-0.00738,0.00530,-0.00039,0.00033,-0.00012]
+
+		Lp = [1,1,1,3,1,3,0,3,1,0,2,5]
+		Lq = [0,1,2,0,3,1,1,2,4,2,0,0]
+		Lpq = [5260.52916,105.94684,2.45656,-0.81885,0.05594,-0.05607,0.01199,-0.00256,0.00128,0.00022,-0.00022,0.00026]
+
+		dX = 1E-5 * ( coords[0] -X0 )
+		dY = 1E-5 * ( coords[1] -Y0 )
+					
+		phi = 0
+		lam = 0
+
+		for k in range(len(Kpq)):
+			phi = phi + ( Kpq[k] * dX**Kp[k] * dY**Kq[k] )
+		phi = phi0 + phi / 3600
+
+		for l in range(len(Lpq)):
+			lam = lam + ( Lpq[l] * dX**Lp[l] * dY**Lq[l] )
+		lam = lam0 + lam / 3600
+
+		return [phi,lam]
 		
 	@staticmethod	
 	def latestunitinfo_method(unitid):
@@ -208,38 +207,9 @@ class Analyse:
 				intx = float(item['rdx'])
 				inty = float(item['rdy'])
 				
-				def fromRdToWgs(  coords ):
-					X0      = 155000
-					Y0      = 463000
-					phi0    = 52.15517440
-					lam0    = 5.38720621
-		
-					Kp = [0,2,0,2,0,2,1,4,2,4,1]
-					Kq = [1,0,2,1,3,2,0,0,3,1,1]
-					Kpq = [3235.65389,-32.58297,-0.24750,-0.84978,-0.06550,-0.01709,-0.00738,0.00530,-0.00039,0.00033,-0.00012]
 
-					Lp = [1,1,1,3,1,3,0,3,1,0,2,5]
-					Lq = [0,1,2,0,3,1,1,2,4,2,0,0]
-					Lpq = [5260.52916,105.94684,2.45656,-0.81885,0.05594,-0.05607,0.01199,-0.00256,0.00128,0.00022,-0.00022,0.00026]
-
-					dX = 1E-5 * ( coords[0] -X0 )
-					dY = 1E-5 * ( coords[1] -Y0 )
-					
-					phi = 0
-					lam = 0
-
-					for k in range(len(Kpq)):
-						phi = phi + ( Kpq[k] * dX**Kp[k] * dY**Kq[k] )
-					phi = phi0 + phi / 3600
-
-					for l in range(len(Lpq)):
-						lam = lam + ( Lpq[l] * dX**Lp[l] * dY**Lq[l] )
-					lam = lam0 + lam / 3600
-
-					return [phi,lam]
-					
 				convertlist = [intx,inty]
-				newcoords = fromRdToWgs(convertlist)
+				newcoords = Analyse.fromRdToWgs(convertlist)
 				unitstatus_list.append(item['rdx'])	
 				unitstatus_list.append(item['rdy'])							
 				unitstatus_list.append(item['speed'])
@@ -258,7 +228,6 @@ class Analyse:
 	@staticmethod		
 	def trackinghistory_method(unitid):
 		trackinghistory_dict = {}
-		#trackinghistory_list = list()
 		url = 'http://145.24.222.121/index.php/'+str(unitid)
 		jsonlist = loads(urlopen(url).read())
 		loopcount = 1;
@@ -267,38 +236,10 @@ class Analyse:
 				intx = float(item['rdx'])
 				inty = float(item['rdy']) 
 				intsatalite = int(item['numsatalites'])
-				def fromRdToWgs(  coords ):
-					X0      = 155000
-					Y0      = 463000
-					phi0    = 52.15517440
-					lam0    = 5.38720621
-		
-					Kp = [0,2,0,2,0,2,1,4,2,4,1]
-					Kq = [1,0,2,1,3,2,0,0,3,1,1]
-					Kpq = [3235.65389,-32.58297,-0.24750,-0.84978,-0.06550,-0.01709,-0.00738,0.00530,-0.00039,0.00033,-0.00012]
-
-					Lp = [1,1,1,3,1,3,0,3,1,0,2,5]
-					Lq = [0,1,2,0,3,1,1,2,4,2,0,0]
-					Lpq = [5260.52916,105.94684,2.45656,-0.81885,0.05594,-0.05607,0.01199,-0.00256,0.00128,0.00022,-0.00022,0.00026]
-
-					dX = 1E-5 * ( coords[0] -X0 )
-					dY = 1E-5 * ( coords[1] -Y0 )
-					
-					phi = 0
-					lam = 0
-
-					for k in range(len(Kpq)):
-						phi = phi + ( Kpq[k] * dX**Kp[k] * dY**Kq[k] )
-					phi = phi0 + phi / 3600
-
-					for l in range(len(Lpq)):
-						lam = lam + ( Lpq[l] * dX**Lp[l] * dY**Lq[l] )
-					lam = lam0 + lam / 3600
-
-					return [phi,lam]
+				
 			
 				convertlist = [intx,inty]
-				newcoords = fromRdToWgs(convertlist)
+				newcoords = Analyse.fromRdToWgs(convertlist)
 				if intsatalite == 0:
 					url = 'http://i849.photobucket.com/albums/ab58/reneheijnen/mark4/blackarea'+str(loopcount)+'.png'
 					loopcount +=1
@@ -315,11 +256,6 @@ class Analyse:
 					url = 'http://i849.photobucket.com/albums/ab58/reneheijnen/mark4/greenarea'+str(loopcount)+'.png'
 					loopcount +=1
 					trackinghistory_dict.update({url:[newcoords]})		
-				#print trackinghistory_dict
 		except:
 			pass
 		return trackinghistory_dict
-	#latestunitinfo_method(14100071)
-	#coordslist =[105921.237079477,479858.598919381]
-	#newlist = fromRdToWgs(coordslist)
-	#print newlist
