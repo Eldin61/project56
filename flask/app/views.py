@@ -1,5 +1,5 @@
 #Imports
-from flask import Flask, render_template, redirect, url_for, request, session, g # Flask plugin
+from flask import Flask, render_template,send_file, redirect, url_for, request, session, g # Flask plugin
 from functools import wraps
 from app import app
 import analyse
@@ -102,6 +102,10 @@ def graphs():
     unitid = analyseobject.allunitid_method()
     satavr = analyseobject.sataliteavarage_method()
     return render_template('pages/graphs.html', title="Graphs", header="Null", nav="Current Analyses",unitid = unitid,satavr=satavr)
+	
+@app.route('/csv.txt', methods=['GET', 'POST'])
+def download():
+    return send_file('csv.txt', as_attachment=True)
 
 @app.route('/cars.html',methods=["POST", "GET"]) # App route makes.........
  

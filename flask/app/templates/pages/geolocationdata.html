@@ -35,6 +35,7 @@
                                             <td>{{connectionlist[1][2][loop.index]}}</td> 
 												<td class="center">
 												<div class="pull-right">
+
 												<center><button type="button" class="btn btn-outline btn-info"  data-toggle="modal" data-target="#myModal1">View Location</button> </center>
 												<!-- Button trigger modal 
 												</div>
@@ -53,8 +54,10 @@
                             </div>
                             <!-- /.table-responsive -->
                             <div class="well">
-                                <a class="btn btn-default btn-lg btn-block"  href="">Export CSV</a>
-                            </div>
+           												<form method="get" action="csv.txt">
+												<button type="submit">Download!</button>
+												</form>               
+						  </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -152,6 +155,8 @@
                 responsive: true
         });
     });
+	
+
     </script>
 
 {% endblock %}
