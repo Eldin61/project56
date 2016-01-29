@@ -3,25 +3,11 @@ from flask import Flask, render_template,send_file, redirect, url_for, request, 
 from functools import wraps
 from app import app
 import analyse
-import psycopg2 # SQLplugin
 from flask_googlemaps import GoogleMaps # Google maps plugin
 from flask_googlemaps import Map # Google maps plugin
 from flask import request # Flask plugin
 
 # Method to force check login when you request a page
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            return redirect(url_for('login'))
-    return wrap
-
-# Method to verify account details for the login system
-def connect_db(): 
-    return psycopg2.connect(database='users', user='userdb', password='root', host='127.0.0.1', port='5432')
-
 @app.route('/logout')# App route makes this method run when www.***.**./logout is requested.
 def logout():
     session.pop('logged_in', None)

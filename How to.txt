@@ -1,0 +1,22 @@
+You should be able to run the project just fine without any problems.
+
+Go in the flask directory and if you are on linux/mac type:
+	venv/bin/python __init__.py
+
+The project should be running on localhost:5000
+
+if you are on windows type:
+	flask\Scripts\python __init__.py
+
+If it does not work on Windows and you get an error "missing python27.dll"
+you need to install your own virtual env. To do this you need to have python 27 installed on your pc.
+Next install virtual env in cmd:
+	pip install virtualenv
+
+Then go into the flask directory again and type:
+	virtualenv localVenv
+	localVenv\Scripts\pip install flask
+	localVenv\Scripts\pip install flask-googlemaps
+
+Then you can activate the project by typing:
+	localVenv\Scripts\python __init__.py
